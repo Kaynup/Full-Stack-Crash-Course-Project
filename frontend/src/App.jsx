@@ -6,6 +6,9 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [name, setName] = useState('')
+  const [role, setRole] = useState('')
+  const [email, setEmail] = useState('')
 
   return (
     <>
@@ -20,6 +23,13 @@ function App() {
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
+        </div>
+        <div>
+          <h2>Employee Registration</h2>
+          <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+          <input type="text" placeholder="Role" value={role} onChange={(e) => setRole(e.target.value)} />
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <button>Submit</button>
         </div>
         <button
           className="counter"
