@@ -1,9 +1,11 @@
 import requests
 
 pl = {
-    "name": "Punyak",
-    "age": 20,
-    "desc": "Backend Dev"
+    "first_name":"Punyak",
+    "last_name":"User",
+    "email":"punyak@test.com",
+    "job_title":"Backend Dev",
+    "salary":50000
 }
 
 print("\nGET Endpoint")
