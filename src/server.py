@@ -1,3 +1,4 @@
+import mysql.connector
 from fastapi import FastAPI
 from typing import Optional
 from pydantic import BaseModel, ValidationError
@@ -6,24 +7,61 @@ from pydantic import BaseModel, ValidationError
 app = FastAPI()
 
 class Payload(BaseModel):
-    name: str
-    age: int
-    desc: Optional[str] = None
+    first_name: str
+    last_name: str
+    email: str
+    job_title: Optional[str] = None
+    salary: Optional[float] = None
+
+def get_connection():
+    return mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="root",
+            database="intern_project"
+        )
 
 @app.get("/status")
 def home():
     return {"message":"API is live"}
 
 @app.post("/register")
-def payload(pl: Payload):
+def register(pl: Payload):
+    con = get_connection()
+    cur = con.cursor()
+
+    query = """
+    INSERT INTO employees 
+    (first_name, last_name, email, hire_date, job_title, salary)
+    VALUES (%s, %s, %s, CURDATE(), %s, %s)
+    """
+
+    cur.execute(query, (
+        pl.first_name,
+        pl.last_name,
+        pl.email,
+        pl.job_title,
+        pl.salary
+    ))
+
+    con.commit()
+
+    cur.close()
+    con.close()
+
     return {
-        "message":"Success!",
-        "data":pl
-        }
+        "message": "Success!"
+    }
 
 # Verification
 try:
-    pl = Payload(name="Punyak", age=20, desc="Backend Dev")
+    pl = Payload(
+        first_name="Punyak",
+        last_name="User",
+        email="punyak@test.com",
+        job_title="Backend Dev",
+        salary=50000
+    )
     print(pl)
 except ValidationError as e:
     print(e.json())
