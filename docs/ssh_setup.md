@@ -1,4 +1,4 @@
-# Git SSH Setup (Option 1) — Linux
+# Git SSH Setup
 
 This guide configures SSH authentication for pushing code to GitHub using Git.
 
@@ -7,7 +7,6 @@ This guide configures SSH authentication for pushing code to GitHub using Git.
 ## Initally
 
 * Git installed (`git --version`)
-* GitHub account
 
 ---
 
