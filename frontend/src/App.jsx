@@ -43,7 +43,7 @@ function App() {
               body: JSON.stringify(data)
             });
             const result = await res.json();
-            console.log(result);
+            alert(JSON.stringify(result));
           }}>Submit</button>
         </div>
         <button
