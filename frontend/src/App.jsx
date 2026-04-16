@@ -29,7 +29,22 @@ function App() {
           <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
           <input type="text" placeholder="Role" value={role} onChange={(e) => setRole(e.target.value)} />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <button>Submit</button>
+          <button onClick={async () => {
+            const data = {
+              first_name: name,
+              last_name: "",
+              email: email,
+              job_title: role,
+              salary: null
+            };
+            const res = await fetch("http://localhost:8000/register", {
+              method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            console.log(result);
+          }}>Submit</button>
         </div>
         <button
           className="counter"

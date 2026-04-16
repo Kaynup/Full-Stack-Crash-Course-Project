@@ -3,6 +3,9 @@
 - GET: '/status' - to check the status of server
 - POST: '/register' - to recieve a json payload and responding with a message
 
+## CORS Enabled
+CORSMiddleware added to allow requests from frontend on port 5173
+
 ## To run the server
 ```bash
 uvicorn server:app --reload
